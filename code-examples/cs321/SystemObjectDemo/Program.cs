@@ -6,8 +6,8 @@ namespace SystemObjectDemo
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-            //Class1.DemoObjects();
+            //Console.WriteLine("Hello, World!");
+            ObjectDemo.DemoObjects();
         }
     }
 }

@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SystemObjectDemo
 {
-    public static class Class1
+    public static class ObjectDemo
     {
         public static void DemoObjects()
         {
@@ -14,9 +10,10 @@ namespace SystemObjectDemo
             object b = "Hello";
             object c = 3.14;
             object[] xs = { a, b, c };
+            var i = 0;
             foreach (var x in xs)
             {
-                Console.WriteLine(x);
+                Console.WriteLine($"Value {i++} is {x} and is of type {x.GetType()}");
             }
         }
     }
