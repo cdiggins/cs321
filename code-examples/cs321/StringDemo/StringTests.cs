@@ -122,11 +122,20 @@ namespace StringDemo
         [Test]
         public static void LastTenChars()
         {
+            // The 0 last character is 'z'
             for (var i = 0; i < 10; ++i)
             {
                 var c = (char)('z' - i);
                 Console.WriteLine($"The {i} last character is {c}");
             }
+
+        }
+
+        [Test]
+        public static void TestCharInString()
+        {
+            var s = "Hello world";
+            Console.WriteLine(s[4]);
         }
 
         public static void CompareEquality(object a, object b)
