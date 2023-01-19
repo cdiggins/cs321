@@ -24,7 +24,7 @@ namespace SystemObjectDemo
             foreach (var f in fs)
             {
                 var fi = new FileInfo(f);
-                Console.WriteLine(FileInfo.Create(fi));
+                Console.WriteLine(fi.Name);
             }
         }
     }

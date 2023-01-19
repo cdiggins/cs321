@@ -1,3 +1,6 @@
+using Newtonsoft.Json.Linq;
+using System.ComponentModel.DataAnnotations;
+
 namespace StringDemo
 {
     public class StringTests
@@ -15,6 +18,75 @@ namespace StringDemo
             CompareEquality(s1, s3);
             CompareEquality(s1, s4);
             CompareEquality(s1, s5);
+        }
+
+        [Test]
+        public static void ComparableInterfaceExample()
+        {
+            var c1 = 'b';
+            var c2 = 'd';
+            var iface = (IComparable<char>)c1;
+            var result = iface.CompareTo(c2);
+            Console.WriteLine($"Compared {c1} to {c2} and the result was {result}");
+        }
+
+        public static void CharParse()
+        {
+
+        }
+
+        public static void TestString(string s)
+        {
+            if (s == null)
+            {
+                Console.WriteLine("The string is null");                           
+            }
+            else 
+            {
+                Console.WriteLine($"The string {s} has length {s.Length}");
+            }
+        }
+
+        [Test]
+        public static void SimpleTestStrings()
+        {
+            var s1 = (string)null;
+            var s2 = "";
+            var s3 = " ";
+            var s4 = " hello ";
+            var s5 = s4.Trim();
+            TestString(s1);
+            TestString(s2);
+            TestString(s3);
+            TestString(s4);
+            TestString(s5);
+        }
+
+        public static void TestNullString()
+        {
+            string s;
+            Console.WriteLine(s);
+        }
+
+        [Test]
+        public static void StringFailOnPurpose()
+        {
+            var s = (string)null;
+            Console.WriteLine($"The string {s} has length {s.Length}");
+        }
+
+        [Test]
+        public static void FormatDemo()
+        {
+            var code = 0x263A;
+            var ch = (char)code;
+            var format1 = string.Format("The code in decimal is {0,10:G}", code);
+            var format2 = string.Format("The code in hexdecimal is {0,10:X}", code);
+            var format3 = string.Format("The character is {0}", ch);
+            Console.WriteLine(format1);
+            Console.WriteLine(format2);
+            Console.WriteLine(format3);
+            Console.WriteLine("But I could have also just written \u263A");
         }
 
         [Test]
@@ -62,7 +134,6 @@ namespace StringDemo
             Console.WriteLine($"a is {a.GetType()} and b is {b.GetType()}");
             Console.WriteLine($"It is {eq} that {a} and {b} are equal");
         }
-
 
         public static void CompareRefEquality(object a, object b)
         {
