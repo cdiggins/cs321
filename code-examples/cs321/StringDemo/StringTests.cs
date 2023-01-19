@@ -65,7 +65,7 @@ namespace StringDemo
         public static void TestNullString()
         {
             string s;
-            Console.WriteLine(s);
+            //Console.WriteLine(s);
         }
 
         [Test]
@@ -171,6 +171,25 @@ namespace StringDemo
         public void Test1()
         {
             Assert.Pass();
+        }
+
+
+        [Test]
+        public static void TestDir()
+        {
+            var dir = Path.GetTempPath();
+
+            Console.WriteLine("Files");            
+            foreach (var f in Directory.GetFiles(dir))
+            {
+                Console.WriteLine($"File {f}");
+            }
+
+            Console.WriteLine("Directories");
+            foreach (var d in Directory.GetDirectories(dir))
+            {
+                Console.WriteLine($"Directory {d}");
+            }
         }
     }
 }
