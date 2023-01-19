@@ -1,5 +1,6 @@
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace StringDemo
 {
@@ -177,18 +178,21 @@ namespace StringDemo
         [Test]
         public static void TestDir()
         {
-            var dir = Path.GetTempPath();
+            var asmLocation = Assembly.GetExecutingAssembly().Location;
+            var testDir = Path.GetDirectoryName(asmLocation);
 
             Console.WriteLine("Files");            
-            foreach (var f in Directory.GetFiles(dir))
+            foreach (var f in Directory.GetFiles(testDir))
             {
-                Console.WriteLine($"File {f}");
+                var name = Path.GetFileName(f);
+                Console.WriteLine(name);
             }
 
             Console.WriteLine("Directories");
-            foreach (var d in Directory.GetDirectories(dir))
+            foreach (var d in Directory.GetDirectories(testDir))
             {
-                Console.WriteLine($"Directory {d}");
+                var name = Path.GetFileName(d);
+                Console.WriteLine(name);
             }
         }
     }
