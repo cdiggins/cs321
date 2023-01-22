@@ -193,7 +193,7 @@ namespace StringDemo
             Console.WriteLine("Files");            
             foreach (var f in Directory.GetFiles(testDir))
             {
-                var name = Path.GetFileName(f);
+                var name = f; // Path.GetFileName(f);
                 Console.WriteLine(name);
             }
 
