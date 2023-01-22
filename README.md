@@ -1,9 +1,13 @@
 # CS321 Advanced Programming Techniques 
 
-## Bishop's University
+## Bishop's University, Winter Session 2023
 
-This class is a sequel to an CS211 Introduction to Programming. You will learn advanced programming techniques such as object-oriented programming, reflection, functional programming, and software architectural patterns in the context of the C# language. 
+### [Course Outline in PDF format](outline.pdf)
 
-The first half of the class will focus on features of C#, evaluation model, and the .NET execution environment. We will also introduce key concepts of object-oriented programming, functional programming, The second half of the course will focus on advanced programming techniques of C# and best practices for software architecture.   
+This class is a sequel to an CS211 Introduction to Programming. You will learn advanced programming techniques such as object-oriented programming, functional programming, and software architectural patterns in the context of the C# language.
 
-The language of instruction will be C# 7.0 and the programming environment will be Visual Studio, but the techniques, principles, and patterns learned will be applicable to many different languages and programming environments.  
+The first half of the course will focus on core features and concepts of C#, object-oriented programming, testdriven development, and functional programming, The second half of the course will focus on more advanced programming techniques, as well as principles, practices, and patterns of software design and architecture.
+
+The language of instruction will be C# 7.0 and the programming environment will be Visual Studio on Windows. The techniques, principles, and patterns learned will be applicable to various high-level multiparadigm languages and programming environments.
+
+The lab assignments will emphasize building familiarity with C#, Visual Studio, .NET, and coding techniques, with the aim of preparing students to be able to effectively complete the final project. Examples include  using the debugger, release and debug builds, unit and integration testing, refactoring code, code reuse, using packages, code analysis, using Git and GitHub, and disassemblers. 
