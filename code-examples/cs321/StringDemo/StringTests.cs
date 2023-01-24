@@ -1,6 +1,8 @@
 using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 
 namespace StringDemo
 {
@@ -178,11 +180,128 @@ namespace StringDemo
         }
 
         [Test]
-        public void Test1()
+        public static void Test1()
         {
             Assert.Pass();
         }
 
+        [Test]
+        public static void Test2()
+        {
+            var x = (object)"Hello"; 
+            var s = (string)"World"; 
+            //Console.WriteLine($"{x.Length}"); 
+            Console.WriteLine($"{s.Length}");
+        }
+
+
+        [Test]
+        public static void Test4()
+        {
+            object x = "Hello";
+            string s = "World";
+            Console.WriteLine($"{x.GetType()}");
+            Console.WriteLine($"{s.GetType()}");
+        }
+
+        [Test]
+        public static void Test3()
+        {
+            object x = "Hello";
+            string s = "World";
+            //Console.WriteLine($"{x.Length}");
+            Console.WriteLine($"{s.Length}");
+        }
+
+        [Test]
+        public static void TestChars1()
+        {
+            var s = "Hello world"; 
+            foreach (var c in s) 
+            {
+                Console.WriteLine($"Char {c} has code {(int)c}");
+            }
+        }
+
+        [Test]
+        public static void TestStringLiterals()
+        {
+            var s1 = "c:\\temp\\test.txt";
+            var s2 = @"c:\temp\test.txt";
+            var s3 = "There is a line break\n here";
+            var s4 = @"There is a line break
+here";
+            Console.WriteLine(s1);
+            Console.WriteLine(s2);
+            Console.WriteLine(s3);
+            Console.WriteLine(s4);
+        }
+
+        [Test]
+        public static void TestIndexOf()
+        {
+            var s = "Bananas are good";
+            var sub = "nana";
+            var n = s.IndexOf(sub);
+            Console.WriteLine($"Indeof {sub} is {n}");
+        }
+
+        [Test]
+        public static void TestSubstring()
+        {
+            var s = "Bananas are good";
+            var n = s.IndexOf("good");
+            var sub = s.Substring(n, 3);
+            Console.WriteLine(sub); // "goo
+        }
+
+        [Test]
+        public static void TestStringCtorsAndOps()
+        {
+            var s1 = new string(new[] { 'h', 'e' });
+            var s2 = new string('l', 2);
+            var s3 = "o";
+            var r = s1 + s2;
+            r += s3;
+            Console.WriteLine(r);
+        }
+
+        [Test]
+        public static void StringJoinDemo()
+        {
+            var input = new object[] { "Hello", "to", "all", "my", 28, "students" };
+            var joined = string.Join(" ", input);
+            Console.WriteLine(joined); // Hello to all my 28 students
+        }
+
+        [Test]
+        public static void TestChars2()
+        {
+            var s = "Hello world";
+            for (var e=s.GetEnumerator(); e.MoveNext(); )
+            {
+                var c = e.Current;
+                Console.WriteLine($"Char {c} has code {(int)c}");
+            }
+        }
+
+        [Test]
+        public static void TestFormat()
+        {
+            var s = $"Pi with 3 digits is {Math.PI,10:F3}";
+            Console.WriteLine(s);
+        }
+
+        [Test]
+        public static void Test5()
+        {
+            var o = (object)"hello"; 
+            var s = (string)o; 
+            var n = (int)o;
+            Console.WriteLine(o);
+            Console.WriteLine(s);
+            Console.WriteLine(n);
+        }
 
         [Test]
         public static void TestDir()
