@@ -238,6 +238,24 @@ here";
         }
 
         [Test]
+        public static void TestStringSplit()
+        {
+            var s = "I like apple, bananas, and grapes.";
+            var xs = s.Split(new char[] { ' ', ',', '.' });
+            foreach (var x in xs)
+                Console.WriteLine(x);
+        }
+
+        [Test]
+        public static void TestStringSplit2()
+        {
+            var s = "I like apple, bananas, and grapes.";
+            var xs = s.Split(' ', ',', '.' );
+            foreach (var x in xs)
+                Console.WriteLine(x);
+        }
+
+        [Test]
         public static void TestIndexOf()
         {
             var s = "Bananas are good";
@@ -275,7 +293,7 @@ here";
         }
 
         [Test]
-        public static void TestChars2()
+        public static void TestCharsEnumerator()
         {
             var s = "Hello world";
             for (var e=s.GetEnumerator(); e.MoveNext(); )
@@ -283,6 +301,15 @@ here";
                 var c = e.Current;
                 Console.WriteLine($"Char {c} has code {(int)c}");
             }
+        }
+
+        [Test]
+        public static void TestCharsForLoop()
+        {
+            var s = "Hello world";
+            var index = s.Length - 1;
+            var ch = s[index];
+            Console.WriteLine($"The character at pos {index} is {ch}");
         }
 
         [Test]
