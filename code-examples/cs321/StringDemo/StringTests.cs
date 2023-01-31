@@ -8,7 +8,45 @@ namespace StringDemo
 {
     public class StringTests
     {
-        
+        public static string Reverse(string s)
+        {
+            var r = "";
+            for (var i=s.Length-1; i >= 0; --i)
+            {
+                r += s[i];
+            }
+            return r;
+        }
+
+        public static bool IsStringReversed(string a, string b)
+        {
+            if (a.Length != b.Length)
+            {
+                return false;
+            }
+            for (var i = 0; i < a.Length; ++i)
+            {
+                var charA = a[i];
+                var charB = b[b.Length - 1 - i];   
+                if (charA != charB)
+                    return false;
+            }
+            return true;
+        }
+
+        [Test]
+        public static void TestReversals()
+        {
+            {
+                var input = "abc";
+                var output = Reverse(input);
+                Assert.AreEqual("cba", output);
+                Assert.IsTrue(IsStringReversed(input, output));
+                Assert.IsTrue(IsStringReversed(output, input));
+                Assert.AreEqual(input, Reverse(Reverse(input)));
+            }
+        }
+
         [Test]
         public void BasicStringExample()
         {

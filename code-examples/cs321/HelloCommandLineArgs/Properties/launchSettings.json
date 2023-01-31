@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "HelloCommandLineArgs": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\cdigg\\git\\cs321\\class-notes"
+    },
+    "Profile 1": {
+      "commandName": "Executable"
+    }
+  }
+}
