@@ -1,7 +1,8 @@
 ﻿namespace Assignment2;
 
 /// <summary>
-/// These helper functions are going to be useful later when you have to write your own sorting algorithms.
+/// Some of these helper functions are going to be especially useful later
+/// when you have to write your own sorting algorithms.
 /// </summary>
 public static class Helpers
 {
@@ -23,4 +24,21 @@ public static class Helpers
     public static void SwapInPlace<T>(IList<T> list, int index1, int index2)
         => (list[index1], list[index2]) = (list[index2], list[index1]);
 
+    /// <summary>
+    /// Returns the nth element counting from the end 
+    /// </summary>
+    public static T NthElementFromEnd<T>(IReadOnlyList<T> list, int n)
+        => list[list.Count - 1 - n];
+    
+    /// <summary>
+    /// Returns true if the first element is the same as the last element,
+    /// and the nth item is the same as the nth last element. 
+    /// </summary>
+    public static bool IsPalindrome<T>(IReadOnlyList<T> list)
+    {
+        for (var i=0; i < list.Count/2; ++i)
+            if (!list[i].Equals(NthElementFromEnd(list, i)))
+                return false;
+        return true;
+    }
 }

@@ -12,7 +12,7 @@ public static class ListOperationsReference
     /// Returns true if the section of list is in ascending order, false otherwise. 
     /// </summary>
     public static bool IsSorted<T>(IReadOnlyList<T> list, int from, int count) where T : IComparable<T>
-        => list.Skip(from).Take(count).Select((x, i) => i == 0 || x.CompareTo(list[i - 1]) >= 0).All(x => x);
+        => list.Select((x, i) => i <= from || i >= from + count || x.CompareTo(list[i - 1]) >= 0).All(x => x);
 
     /// <summary>
     /// Returns the number of times the character occurs in the list 
@@ -27,10 +27,16 @@ public static class ListOperationsReference
         => list1.Count == list2.Count && list1.Zip(list2, (x, y) => x.Equals(y)).All(x => x);
 
     /// <summary>
-    /// Returns true if the second collection is the same as the second in reverse order. 
+    /// Returns true if the second collection is the same as the first in reverse order. 
     /// </summary>
     public static bool IsReversed<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2)
-        => list1.Count == list2.Count && list1.Zip(list2.Reverse(), (x, y) => x.Equals(y)).All(x => x);
+        => list1.Count == list2.Count && list1.Select((x, i) => x.Equals(list2[list2.Count - 1 - i])).All(x => x);
+
+    /// <summary>
+    /// Returns true if the second collection is the same as the first sequence starting from index in reverse order. 
+    /// </summary>
+    public static bool IsReversed<T>(IReadOnlyList<T> list1, int index, IReadOnlyList<T> list2)
+        => index + list2.Count < list1.Count && list1.Select((x, i) => i < index || x.Equals(list2[list2.Count - 1 - i - index])).All(x => x);
 
     /// <summary>
     /// Returns true if the collection starts with the specified elements 
@@ -101,7 +107,7 @@ public static class ListOperationsReference
     /// <summary>
     /// Returns elements which have a count of exactly one
     /// </summary>
-    public static IReadOnlyList<T> GetUniqueElements<T>(IReadOnlyList<T> list)
+    public static IReadOnlyList<T> UniqueElements<T>(IReadOnlyList<T> list)
         => list.Distinct().ToList();
 
     /// <summary>

@@ -121,7 +121,7 @@ namespace Assignment2
         /// <summary>
         /// Returns elements which have a count of exactly one
         /// </summary>
-        public static IReadOnlyList<T> GetUniqueElements<T>(IReadOnlyList<T> list)
+        public static IReadOnlyList<T> UniqueElements<T>(IReadOnlyList<T> list)
             => throw new NotImplementedException();
 
         /// <summary>
@@ -194,12 +194,6 @@ namespace Assignment2
         /// Returns a list containing count elements from the original list starting at start
         /// </summary>
         public static IReadOnlyList<T> Subarray<T>(IReadOnlyList<T> list, int start, int count)
-            => throw new NotImplementedException();
-
-        /// <summary>
-        /// Swaps the items in the list.  
-        /// </summary>
-        public static void SwapInPlace<T>(IList<T> list, int index1, int index2)
             => throw new NotImplementedException();
 
         /// <summary>
