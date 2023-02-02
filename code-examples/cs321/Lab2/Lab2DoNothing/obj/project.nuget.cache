@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ueV56ZXUZnw1GFsCuXC92qUrP4PS0OrkNuNLGa7YnigO8mj5JS+7jFJIEjRTuvnOjo7dQ2kf/rQvdemYSJYU4g==",
+  "dgSpecHash": "KBVZSO1kDw1Xp9SQBOcUkfF/fcIUyg1bXprVUmfAdkLAt57cyxyZdoNflnBY8jOoPBg0ShG/m1zEWgiwpYDu2A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\cdiggins\\source\\repos\\Lab2\\Lab2DoNothing\\Lab2DoNothing.csproj",
+  "projectFilePath": "C:\\Users\\cdigg\\git\\cs321\\code-examples\\cs321\\Lab2\\Lab2DoNothing\\Lab2DoNothing.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

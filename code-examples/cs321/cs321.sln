@@ -11,9 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemosAndTests", "StringDemo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleDrawing", "ConsoleDrawing\ConsoleDrawing.csproj", "{32851176-35A9-4373-8A18-835303BDEAA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloCommandLineArgs", "HelloCommandLineArgs\HelloCommandLineArgs.csproj", "{77FE5ECD-F28A-4DC1-8606-56FB11B99715}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloCommandLineArgs", "HelloCommandLineArgs\HelloCommandLineArgs.csproj", "{77FE5ECD-F28A-4DC1-8606-56FB11B99715}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment2", "Assignment2\Assignment2.csproj", "{15C851E7-C472-44F2-8886-D8390519694A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assignment2", "Assignment2\Assignment2.csproj", "{15C851E7-C472-44F2-8886-D8390519694A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{968E8FF6-B190-45A7-B21A-7736F40A36A3}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

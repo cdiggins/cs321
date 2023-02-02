@@ -58,7 +58,7 @@ namespace Assignment2
         /// <summary>
         /// Returns true if the second collection is the same as the second in reverse order. 
         /// </summary>
-        public static bool SequenceReversed<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2)
+        public static bool IsReversed<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2)
             => throw new NotImplementedException();
 
         /// <summary>
@@ -154,13 +154,25 @@ namespace Assignment2
         /// <summary>
         /// Creates a copy of a list that does not have the element at the specified position. 
         /// </summary>
-        public static IReadOnlyList<T> RemoveElement<T>(IReadOnlyList<T> list, int index)
+        public static IReadOnlyList<T> RemoveAt<T>(IReadOnlyList<T> list, int index)
             => throw new NotImplementedException();
 
         /// <summary>
-        /// Creates a copy of a list that removes the elements from the specified location 
+        /// Returns all elements except those are equal to the element 
         /// </summary>
-        public static IReadOnlyList<T> RemoveElements<T>(IReadOnlyList<T> list, int index, int count)
+        public static IReadOnlyList<T> RemoveElements<T>(IReadOnlyList<T> list, T element)
+            => throw new NotImplementedException();
+
+        /// <summary>
+        /// Returns all elements except those are in the second collection
+        /// </summary>
+        public static IReadOnlyList<T> RemoveElements<T>(IReadOnlyList<T> list, IReadOnlyList<T> elements)
+            => throw new NotImplementedException();
+
+        /// <summary>
+        /// Creates a copy of a list that removes a range from the specified location 
+        /// </summary>
+        public static IReadOnlyList<T> RemoveRange<T>(IReadOnlyList<T> list, int index, int count)
             => throw new NotImplementedException();
 
         /// <summary>
@@ -170,21 +182,15 @@ namespace Assignment2
             => throw new NotImplementedException();
 
         /// <summary>
-        /// Merges two lists that are sorted maintaining sorted order. 
-        /// </summary>
-        public static IReadOnlyList<T> SortedMerge<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2)
-            => throw new NotImplementedException();
-
-        /// <summary>
         /// Concatenates two lists. 
         /// </summary>
         public static IReadOnlyList<T> AddElements<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2)
             => throw new NotImplementedException();
 
         /// <summary>
-        /// Creates a list from the original list containing elements 
+        /// Merges two lists that are sorted maintaining sorted order. 
         /// </summary>
-        public static IReadOnlyList<T> RemoveRange<T>(IReadOnlyList<T> list, int start, int count)
+        public static IReadOnlyList<T> SortedMerge<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2)
             => throw new NotImplementedException();
 
         /// <summary>
@@ -197,18 +203,6 @@ namespace Assignment2
         /// Creates a list by reversing elements within a range of elements 
         /// </summary>
         public static IReadOnlyList<T> Reverse<T>(IReadOnlyList<T> list, int start, int count)
-            => throw new NotImplementedException();
-
-        /// <summary>
-        /// Fills the list with the given element
-        /// </summary>
-        public static void FillInPlace<T>(IList<T> list, T element)
-            => throw new NotImplementedException();
-
-        /// <summary>
-        /// Fills the list with the given element from start to count
-        /// </summary>
-        public static void FillInPlace<T>(IList<T> list, int start, int count, T element)
             => throw new NotImplementedException();
 
         /// <summary>
@@ -226,13 +220,13 @@ namespace Assignment2
         /// <summary>
         /// Sorts a list (use any sort algorithm you want).
         /// </summary>
-        public static void SortInPlace<T>(IList<T> list) where T : IComparable<T>
+        public static IReadOnlyList<T> Sort<T>(IReadOnlyList<T> list) where T : IComparable<T>
             => throw new NotImplementedException();
 
         /// <summary>
-        /// Returns all elements except those are equal to the element 
+        /// Sorts a list (use any sort algorithm you want).
         /// </summary>
-        public static IReadOnlyList<T> Except<T>(IReadOnlyList<T> list, T element)
+        public static void SortInPlace<T>(IList<T> list) where T : IComparable<T>
             => throw new NotImplementedException();
 
         /// <summary>

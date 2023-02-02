@@ -10,7 +10,14 @@ namespace DemosAndTests
     {
         public static int Factorial(int n)
         {
-            throw new NotImplementedException();
+            if (n <= 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return n * Factorial(n - 1);
+            }
         }
 
         [Test]
@@ -24,11 +31,13 @@ namespace DemosAndTests
         }
 
         [Test]
-        public static void TestFactorial2()
+        [TestCase(99)]
+        public static void TestFactorial2(int max)
         {
-            for (var i = 0; i < 99; i++)
+            for (var i = 1; i < max; i++)
             {
                 // This is effectively the definition of Factorial
+                Assert.IsTrue(Factorial(i) > 0);
                 Assert.AreEqual(Factorial(i - 1) * i, Factorial(i));
             }
         }
