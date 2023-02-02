@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//using static Assignment2.ListOperationsReference;
 using static Assignment2.ListOperations;
 
 namespace Assignment2
@@ -196,7 +197,7 @@ namespace Assignment2
         [Test]
         public static void TestRemoveElements()
         {
-            Assert.AreEqual(EndsWith(new[] { 1, 2, 3 }, new[] { 2, 3 }));
+            Assert.IsTrue(EndsWith(new[] { 1, 2, 3 }, new[] { 2, 3 }));
         }
 
         [Test]

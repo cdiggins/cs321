@@ -20,15 +20,6 @@
 
 namespace Assignment2
 {
-    public static class Helpers
-    {
-        public static bool IsLessThanOrEqualTo<T>(T first, T second) where T : IComparable<T>
-            => first.CompareTo(second) <= 0;
-
-        public static (T, T) Sort<T>(T first, T second) where T : IComparable<T>
-            => IsLessThanOrEqualTo(first, second) ? (first, second) : (second, first);
-    }
-
     public static class ListOperations
     {
         /// <summary>
@@ -115,12 +106,6 @@ namespace Assignment2
         public static bool Contains<T>(IReadOnlyList<T> list, T value)
             => throw new NotImplementedException();
 
-        /// <summary>
-        /// Returns true if the sub-list is contained in the main list 
-        /// </summary>
-        public static bool Contains<T>(IReadOnlyList<T> list, IReadOnlyList<T> sub)
-            => throw new NotImplementedException();
- 
         /// <summary>
         /// Returns the index of the minimum item in a list 
         /// </summary>
@@ -241,4 +226,5 @@ namespace Assignment2
         public static IReadOnlyList<T> Filter<T>(IReadOnlyList<T> list, Func<T, bool> predicate)
             => throw new NotImplementedException();
     }
+
 }
