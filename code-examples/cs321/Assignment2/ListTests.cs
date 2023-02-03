@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 using static Assignment2.ListOperationsReference;
 //using static Assignment2.ListOperations;
@@ -146,7 +145,7 @@ namespace Assignment2
         [Test]
         public static void TestAddElement()
         {
-            Assert.AreEqual(AddElement(new[] { 1, 2 }, 3), new[] { 1, 2, 3});
+            Assert.AreEqual(new[] { 1, 2, 3 }, AddElement(new[] { 1, 2 }, 3));
         }
 
         [Test]
@@ -533,7 +532,7 @@ namespace Assignment2
                     var suffix = Skip(xs, i);
                     var suffix2 = TakeLast(xs, xs.Length - i);
                     Assert.AreEqual(suffix, suffix2);
-                    Assert.AreEqual(i, suffix.Count);
+                    Assert.AreEqual(xs.Length - i, suffix.Count);
                     Assert.IsTrue(EndsWith(xs, suffix));
                 }
             }
@@ -616,12 +615,12 @@ namespace Assignment2
                 
                 for (var i = 0; i <= xs.Length; ++i)
                 {
-                    var ys = InsertElement(xs, i, 99);
+                    var ys = InsertElement(xs, 99, i);
                     Assert.AreEqual(xs.Length + 1, ys.Count);
                     Assert.AreEqual(99, ys[i]);
-                    for (var j = 0; j < xs.Length; ++j)
+                    for (var j = i + 1; j < ys.Count; ++j)
                     {
-                        Assert.AreEqual(xs[j], ys[j < i ? j : j + 1]);
+                        Assert.AreEqual(xs[j-1], ys[j]);
                     }
                 }
             }
@@ -669,7 +668,8 @@ namespace Assignment2
                     for (var cnt = 0; cnt < xs.Length - i; ++cnt)
                     {
                         var tmp = Reverse(xs, i, cnt);
-                        Assert.IsTrue(IsReversed(xs, i, tmp));
+                        var sub = Subarray(tmp, i, cnt);
+                        Assert.IsTrue(IsReversed(xs, i, sub));
                     }
                 }
             }

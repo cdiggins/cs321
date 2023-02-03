@@ -2,7 +2,7 @@
   "profiles": {
     "HelloCommandLineArgs": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\cdigg\\git\\cs321\\class-notes"
+      "commandLineArgs": "C:\\Users\\cdigg\\git\\cs321\\class-notes Christopher was here"
     },
     "Profile 1": {
       "commandName": "Executable"

@@ -1,0 +1,20 @@
+{
+  "profiles": {
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    },
+    "Lab2Find Standard Input": {
+      "commandName": "Project",
+      "commandLineArgs": "public"
+    },
+    "Lab2Find File": {
+      "commandName": "Project",
+      "commandLineArgs": "public \"C:\\Users\\cdigg\\git\\cs321\\code-examples\\cs321\\Lab2\\Lab2Find\\Program.cs\""
+    },
+    "Lab2Find Help": {
+      "commandName": "Project",
+      "commandLineArgs": "/?"
+    }
+  }
+}
