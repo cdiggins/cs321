@@ -233,7 +233,7 @@ namespace Assignment2
         /// <summary>
         /// Merges two lists that are sorted maintaining sorted order. 
         /// </summary>
-        public static IReadOnlyList<T> SortedMerge<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2)
+        public static IReadOnlyList<T> SortedMerge<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2) where T : IComparable<T>
         {
             throw new NotImplementedException();
         }

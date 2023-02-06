@@ -216,7 +216,7 @@ public static class ListOperationsReference
     /// <summary>
     /// Merges two lists that are sorted maintaining sorted order. 
     /// </summary>
-    public static IReadOnlyList<T> SortedMerge<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2)
+    public static IReadOnlyList<T> SortedMerge<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2) where T: IComparable<T>
     {
         return list1.Concat(list2).OrderBy(x => x).ToList();
     }

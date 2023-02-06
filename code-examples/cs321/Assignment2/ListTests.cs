@@ -1,11 +1,17 @@
-﻿using NUnit.Framework;
+﻿using System.Runtime.ExceptionServices;
+using System.Xml.Linq;
+using NUnit.Framework;
 
 using static Assignment2.ListOperationsReference;
 //using static Assignment2.ListOperations;
 
 namespace Assignment2
 {
-    public static class ListSmokeTests1
+    /// <summary>
+    /// Minimal unit tests for the ListOperations class.
+    /// In each test we give a simple input and expected output and check it works. 
+    /// </summary>
+    public static class ListTestsBasic
     {
         [Test]
         public static void TestIsSorted()
@@ -89,13 +95,6 @@ namespace Assignment2
         public static void TestContains()
         {
             Assert.IsTrue(Contains(new[] { 1, 2, 3 }, 2));
-            Assert.IsFalse(Contains(new[] { 1, 2, 3 }, 4));
-        }
-
-        [Test]
-        public static void TestContainsRange()
-        {
-            Assert.IsTrue(EndsWith(new[] { 1, 2, 3 }, new[] { 2, 3 }));
         }
 
         [Test]
@@ -115,7 +114,7 @@ namespace Assignment2
         [Test]
         public static void TestUniqueElements()
         {
-            Assert.AreEqual(new[] { 1, 2 }, UniqueElements(new[] { 1, 2, 2, 1 }));
+            Assert.AreEqual(new[] { 1, 2 }, UniqueElements(new[] { 3, 1, 2, 3  }));
         }
 
         [Test]
@@ -140,6 +139,12 @@ namespace Assignment2
         public static void TestRemoveElements()
         {
             Assert.AreEqual(new[] { 1 }, RemoveElements(new[] { 1, 2, 3 }, new[] { 2, 3 }));
+        }
+
+        [Test]
+        public static void TestRemoveAt()
+        {
+            Assert.AreEqual(new[] { 1, 2 }, RemoveAt(new[] { 1, 2, 3 }, 2));
         }
 
         [Test]
@@ -190,56 +195,75 @@ namespace Assignment2
             Assert.AreEqual(new[] { 2 }, Filter(new[] { 1, 2, 3 }, x => x % 2 == 0));
         }
     }
-    public static class ListSmokeTests2
+
+    /// <summary>
+    /// Additional unit tests for the ListOperations class.
+    /// In these tests we check with additional inputs, and where possible check for expected negative results 
+    /// </summary>
+    public static class ListTestsAdditional
     {
         [Test]
         public static void TestIsSorted()
         {
-            Assert.IsTrue(IsSorted(new[] { 1, 2, 3 }));
+            Assert.IsTrue(IsSorted(new int[] { }));
+            Assert.IsTrue(IsSorted(new[] { 1 }));
+            Assert.IsTrue(IsSorted(new[] { 1, 1, 1 }));
+            Assert.IsFalse(IsSorted(new[] { 3, 2, 1 }));
+            Assert.IsFalse(IsSorted(new[] { 1, 2, 1 }));
         }
 
         [Test]
         public static void TestIsSortedRange()
         {
-            Assert.IsTrue(IsSorted(new[] { 3, 1, 2 }, 1, 2));
+            Assert.IsTrue(IsSorted(new[] { 3, 1, 2 }, 0, 1));
+            Assert.IsFalse(IsSorted(new[] { 3, 1, 2 }, 0, 2));
         }
 
         [Test]
         public static void TestCount()
         {
-            Assert.AreEqual(2, Count(new[] { 1, 2, 1, }, 1));
+            Assert.AreEqual(1, Count(new[] { 1, 2, 1, }, 2));
+            Assert.AreEqual(0, Count(new[] { 1, 2, 1, }, 3));
         }
 
         [Test]
         public static void TestListEquals()
         {
-            Assert.IsTrue(ListEquals(new[] { 1, 2, 3 }, new[] { 1, 2, 3 }));
+            Assert.IsTrue(ListEquals(new int[] { }, new int[] { }));
+            Assert.IsFalse(ListEquals(new[] { 1, 2 }, new[] { 2, 3 }));
+            Assert.IsFalse(ListEquals(new[] { 1 }, new[] { 2 }));
+            Assert.IsFalse(ListEquals(new[] { 1, 2 }, new[] { 1, 2, 3 }));
         }
 
         [Test]
         public static void TestIsReversed()
         {
-            Assert.IsTrue(IsReversed(new[] { 1, 2, 3 }, new[] { 3, 2, 1 }));
+            Assert.IsTrue(IsReversed(new int[] { }, new int[] { }));
+            Assert.IsTrue(IsReversed(new[] { 1 }, new[] { 1 }));
+            Assert.IsFalse(IsReversed(new[] { 1 }, new[] { 2 }));
+            Assert.IsTrue(IsReversed(new[] { 1, 1 }, new[] { 1, 1 }));
+            Assert.IsFalse(IsReversed(new[] { 1, 2, 3 }, new[] { 1, 2, 3 }));
         }
 
         [Test]
         public static void TestStartsWith()
         {
-            Assert.IsTrue(StartsWith(new[] { 1, 2, 3 }, new[] { 1 }));
-            /* TODO: remove
             Assert.IsTrue(StartsWith(new[] { 1, 2, 3 }, new[] { 1, 2 }));
             Assert.IsTrue(StartsWith(new[] { 1, 2, 3 }, new[] { 1, 2, 3 }));
             Assert.IsTrue(StartsWith(new[] { 1, 2, 3 }, new int[] { }));
             Assert.IsTrue(StartsWith(new int[] { }, new int[] { }));
             Assert.IsFalse(StartsWith(new[] { 1, 2, 3 }, new[] { 2, 3 }));
             Assert.IsFalse(StartsWith(new[] { 1, 2, 3 }, new[] { 1, 2, 3, 4 }));
-            */
         }
 
         [Test]
         public static void TestEndsWith()
         {
-            Assert.IsTrue(EndsWith(new[] { 1, 2, 3 }, new[] { 2, 3 }));
+            Assert.IsTrue(EndsWith(new[] { 1, 2, 3 }, new[] { 1, 2, 3 }));
+            Assert.IsTrue(EndsWith(new[] { 1, 2, 3 }, new[] { 3 }));
+            Assert.IsTrue(EndsWith(new[] { 1, 2, 3 }, new int[] { }));
+            Assert.IsFalse(EndsWith(new[] { 1, 2, 3 }, new[] { 1, 2 }));
+            Assert.IsFalse(EndsWith(new[] { 1, 2, 3 }, new[] { 1, 3 }));
         }
 
         [Test]
@@ -261,148 +285,168 @@ namespace Assignment2
         [Test]
         public static void TestSkip()
         {
-            Assert.AreEqual(new[] { 2, 3 }, Skip(new[] { 1, 2, 3 }, 1));
+            Assert.AreEqual(new[] { 1, 2, 3 }, Skip(new[] { 1, 2, 3 }, 0));
+            Assert.AreEqual(new int[] { }, Skip(new[] { 1, 2, 3 }, 3));
         }
 
         [Test]
         public static void TestTake()
         {
-            Assert.AreEqual(new[] { 1, 2 }, Take(new[] { 1, 2, 3 }, 2));
+            Assert.AreEqual(new[] { 1, 2, 3 }, Take(new[] { 1, 2, 3 }, 3));
+            Assert.AreEqual(new int[] { }, Take(new[] { 1, 2, 3 }, 0));
         }
-
 
         [Test]
         public static void TestTakeLast()
         {
-            Assert.AreEqual(new[] { 2, 3 }, TakeLast(new[] { 1, 2, 3 }, 2));
+            Assert.AreEqual(new[] { 1, 2, 3 }, TakeLast(new[] { 1, 2, 3 }, 3));
+            Assert.AreEqual(new int[] { }, TakeLast(new[] { 1, 2, 3 }, 0));
         }
 
         [Test]
         public static void TestDrop()
         {
-            Assert.AreEqual(new[] { 1 }, Drop(new[] { 1, 2, 3 }, 2));
+            Assert.AreEqual(new[] { 1, 2, 3 }, Drop(new[] { 1, 2, 3 }, 0));
+            Assert.AreEqual(new int[] { }, Drop(new[] { 1, 2, 3 }, 3));
         }
 
         [Test]
         public static void TestContains()
         {
-            Assert.IsTrue(Contains(new[] { 1, 2, 3 }, 2));
+            Assert.IsFalse(Contains(new int[] { }, 2));
             Assert.IsFalse(Contains(new[] { 1, 2, 3 }, 4));
-        }
-
-        [Test]
-        public static void TestContainsRange()
-        {
-            Assert.IsTrue(EndsWith(new[] { 1, 2, 3 }, new[] { 2, 3 }));
         }
 
         [Test]
         public static void TestIndexOfMin()
         {
-            Assert.AreEqual(0, IndexOfMin(new[] { 1, 2, 3 }));
-            Assert.AreEqual(2, IndexOfMin(new[] { 3, 2, 1 }));
+            Assert.AreEqual(-1, IndexOfMin(new int[] { }));
+            Assert.AreEqual(0, IndexOfMin(new[] { 1, 1, 1 }));
         }
 
         [Test]
         public static void TestIndexOfMax()
         {
-            Assert.AreEqual(2, IndexOfMax(new[] { 1, 2, 3 }));
-            Assert.AreEqual(0, IndexOfMax(new[] { 3, 2, 1 }));
+            Assert.AreEqual(-1, IndexOfMax(new int[] { }));
+            Assert.AreEqual(0, IndexOfMax(new[] { 1, 1, 1 }));
         }
 
         [Test]
         public static void TestUniqueElements()
         {
-            Assert.AreEqual(new[] { 1, 2 }, UniqueElements(new[] { 1, 2, 2, 1 }));
+            Assert.AreEqual(new int[] { }, UniqueElements(new int[] { }));
+            Assert.AreEqual(new[] { 1 }, UniqueElements(new[] { 1 }));
+            Assert.AreEqual(new int[] { }, UniqueElements(new[] { 1, 1, 1 }));
+            Assert.AreEqual(new[] { 1, 2 }, UniqueElements(new[] { 1, 2 }));
         }
 
         [Test]
         public static void TestInsertElement()
         {
-            Assert.AreEqual(new[] { 1, 9, 2, 3 }, InsertElement(new[] { 1, 2, 3 }, 9, 1));
+            Assert.AreEqual(new[] { 9, 1, 2, 3 }, InsertElement(new[] { 1, 2, 3 }, 9, 0));
+            Assert.AreEqual(new[] { 1, 2, 3, 9 }, InsertElement(new[] { 1, 2, 3 }, 9, 3 ));
+            Assert.AreEqual(new[] { 9 }, InsertElement(new int[] { }, 9, 0 ));
         }
 
         [Test]
         public static void TestInsertElements()
         {
+            Assert.AreEqual(new[] { 1, 2, 3 }, InsertElements(new[] { 1, 2, 3 }, new int[] { }, 0));
+            Assert.AreEqual(new[] { 1, 2, 3, 1, 2, 3 }, InsertElements(new[] { 1, 2, 3 }, new [] { 1, 2, 3 }, 0));
             Assert.AreEqual(new[] { 1, 4, 5, 2, 3 }, InsertElements(new[] { 1, 2, 3 }, new[] { 4, 5 }, 1));
         }
 
         [Test]
         public static void TestRemoveElement()
         {
-            Assert.AreEqual(new[] { 1, 3 }, RemoveElements(new[] { 1, 2, 3 }, 2));
+            Assert.AreEqual(new[] { 1, 2, 3 }, RemoveElements(new[] { 1, 2, 3 }, 99));
         }
 
         [Test]
         public static void TestRemoveElements()
         {
-            Assert.AreEqual(new[] { 1 }, RemoveElements(new[] { 1, 2, 3 }, new[] { 2, 3 }));
+            Assert.AreEqual(new int[] { }, RemoveElements(new[] { 1, 2, 3 }, new[] { 1, 2, 3 }));
+            Assert.AreEqual(new[] { 1, 2, 3 }, RemoveElements(new[] { 1, 2, 3 }, new int[] { }));
+        }
+
+        [Test]
+        public static void TestRemoveAt()
+        {
+            Assert.AreEqual(new int[] { }, RemoveAt(new[] { 1 }, 0));
         }
 
         [Test]
         public static void TestAddElement()
         {
-            Assert.AreEqual(AddElement(new[] { 1, 2 }, 3), new[] { 1, 2, 3 });
+            Assert.AreEqual(new[] { 1 }, AddElement(new int[] { }, 1));
         }
 
         [Test]
         public static void TestReverse()
         {
-            Assert.AreEqual(new[] { 3, 2, 1 }, Reverse(new[] { 1, 2, 3 }));
+            var xs = new[] { 1, 2, 3 };
+            Assert.AreEqual(xs, Reverse(Reverse(xs)));
+            Assert.AreEqual(new[] { 1 }, Reverse(new[] { 1 }));
         }
 
         [Test]
         public static void TestReverseRange()
         {
-            Assert.AreEqual(new[] { 1, 3, 2 }, Reverse(new[] { 1, 2, 3 }, 1, 2));
+            Assert.AreEqual(new[] { 1, 2, 3 }, Reverse(new[] { 1, 2, 3 }, 0, 0));
+            Assert.AreEqual(new[] { 1, 2, 3 }, Reverse(new[] { 1, 2, 3 }, 1, 0));
+            Assert.AreEqual(new[] { 1, 2, 3 }, Reverse(new[] { 1, 2, 3 }, 1, 1));
+            Assert.AreEqual(new[] { 3, 2, 1 }, Reverse(new[] { 1, 2, 3 }, 0, 3));
         }
 
         [Test]
         public static void TestSubArray()
         {
-            Assert.AreEqual(new[] { 2, 3 }, Subarray(new[] { 1, 2, 3 }, 1, 2));
+            Assert.AreEqual(new int[] { }, Subarray(new[] { 1, 2, 3 }, 0, 0));
+            var xs = new[] { 1, 2, 3 };
+            Assert.AreEqual(xs, Subarray(xs, 0, 3));
         }
 
         [Test]
         public static void TestSortedMerge()
         {
-            Assert.AreEqual(SortedMerge(new[] { 1, 3, 5 }, new[] { 2, 4 }), new[] { 1, 2, 3, 4, 5 });
-        }
-
-        [Test]
-        public static void TestRemove()
-        {
-            Assert.AreEqual(new[] { 1, 3 }, RemoveElements(new[] { 1, 2, 3 }, 2));
+            Assert.AreEqual(new int[] { }, SortedMerge(new int[] { }, new int[] { }));
+            Assert.AreEqual(new [] { 1, 1 }, SortedMerge(new [] { 1 }, new int[] { 1 }));
         }
 
         [Test]
         public static void TestTransform()
         {
-            Assert.AreEqual(new[] { 2, 4, 6 }, Transform(new[] { 1, 2, 3 }, x => x * 2));
+            Assert.AreEqual(new[] { 1, 2, 3 }, Transform(new[] { 1, 2, 3 }, x => x));
+            Assert.AreEqual(new int[] { }, Transform(new int[] { }, x => x));
         }
 
         [Test]
         public static void TestFilter()
         {
-            Assert.AreEqual(new[] { 2 }, Filter(new[] { 1, 2, 3 }, x => x % 2 == 0));
+            Assert.AreEqual(new int[] { }, Filter(new[] { 1, 2, 3 }, x => false));
+            Assert.AreEqual(new[] {1,2,3 }, Filter(new[] { 1, 2, 3 }, x => true));
         }
     }
-
+    
+    /// <summary>
+    /// This is a more extensive set of tests that runs thgough a set of inputs and validates properties
+    /// and equalities
+    /// </summary>
     public static class ListTestsExtensive
     {
         public static int[][] Inputs = new[]
         {
             Array.Empty<int>(),
-            new [] { 1 },
-            new [] { 1, 2 },
-            new [] { 1, 2, 3, 4, 5 },
-            new [] { 5, 4, 3, 2, 1 },
-            new [] { 1, 2, 3, 2, 1 },
-            new [] { 1, 1, 2, 2, },
-            new [] { 1, 2, 1, 2 },
-            new [] { 1, 5, 2, 4, 3 },
-            new [] { 1, 1, 1, 1, 1 },
+            new[] { 1 },
+            new[] { 1, 2 },
+            new[] { 1, 2, 3, 4, 5 },
+            new[] { 5, 4, 3, 2, 1 },
+            new[] { 1, 2, 3, 2, 1 },
+            new[] { 1, 1, 2, 2, },
+            new[] { 1, 2, 1, 2 },
+            new[] { 1, 5, 2, 4, 3 },
+            new[] { 1, 1, 1, 1, 1 },
+            new[] { 1, 1, 1, 1, 5 },
         };
 
         [Test]
@@ -447,7 +491,7 @@ namespace Assignment2
             foreach (var xs in Inputs)
             {
                 Assert.IsTrue(ListEquals(xs, xs));
-                Assert.IsFalse(ListEquals(xs, new [] { 99 }));
+                Assert.IsFalse(ListEquals(xs, new[] { 99 }));
             }
         }
 
@@ -469,7 +513,7 @@ namespace Assignment2
             {
                 Assert.IsTrue(StartsWith(xs, xs));
                 Assert.IsTrue(StartsWith(xs, Array.Empty<int>()));
-                for (var i=0; i < xs.Length; ++i)
+                for (var i = 0; i < xs.Length; ++i)
                 {
                     var prefix = Take(xs, i);
                     Assert.IsTrue(StartsWith(xs, prefix));
@@ -516,7 +560,7 @@ namespace Assignment2
 
                 if (xs.Length > 1)
                 {
-                    Assert.AreEqual(xs.Length -1, LastIndexOf(xs, xs[xs.Length-1]));
+                    Assert.AreEqual(xs.Length - 1, LastIndexOf(xs, xs[xs.Length - 1]));
                     Assert.IsTrue(IndexOf(xs, xs[0]) >= 0);
                 }
             }
@@ -564,7 +608,7 @@ namespace Assignment2
                     Assert.IsTrue(Contains(xs, x));
             }
         }
-        
+
         [Test]
         public static void TestIndexOfMinAndMax()
         {
@@ -612,7 +656,7 @@ namespace Assignment2
             foreach (var xs in Inputs)
             {
                 Assert.AreEqual(InsertElement(xs, 99, xs.Length), AddElement(xs, 99));
-                
+
                 for (var i = 0; i <= xs.Length; ++i)
                 {
                     var ys = InsertElement(xs, 99, i);
@@ -620,7 +664,7 @@ namespace Assignment2
                     Assert.AreEqual(99, ys[i]);
                     for (var j = i + 1; j < ys.Count; ++j)
                     {
-                        Assert.AreEqual(xs[j-1], ys[j]);
+                        Assert.AreEqual(xs[j - 1], ys[j]);
                     }
                 }
             }
@@ -629,31 +673,80 @@ namespace Assignment2
         [Test]
         public static void TestInsertElements()
         {
-            Assert.AreEqual(new[] { 1, 4, 5, 2, 3 }, InsertElements(new[] { 1, 2, 3 }, new[] { 4, 5 }, 1));
+            var tmp = new[] { 1, 2, 3 };
+            foreach (var xs in Inputs)
+            {
+                Assert.AreEqual(AddElements(xs, tmp), InsertElements(xs, tmp, xs.Length));
+                
+                for (var i = 0; i < xs.Length; ++i)
+                {
+                    var r = InsertElements(xs, tmp, i);
+                    Assert.AreEqual(xs.Length + tmp.Length, r.Count);
+                    var sub = Subarray(r, i, tmp.Length);
+                    Assert.AreEqual(tmp, sub);
+                }
+            }
         }
 
         [Test]
         public static void TestRemoveElement()
         {
-            Assert.AreEqual(new[] { 1, 3 }, RemoveElements(new[] { 1, 2, 3 }, 2));
+            foreach (var xs in Inputs)
+            {
+                if (xs.Length > 0)
+                {
+                    Assert.IsTrue(RemoveElements(xs, xs[0]).Count < xs.Length);
+                }
+            }
         }
 
         [Test]
         public static void TestRemoveElements()
         {
-            Assert.AreEqual(new[] { 1 }, RemoveElements(new[] { 1, 2, 3 }, new[] { 2, 3 }));
+            foreach (var xs in Inputs)
+            {
+                Assert.AreEqual(0, RemoveElements(xs, xs).Count);
+                Assert.AreEqual(xs.Length, RemoveElements(xs, new[] { 99 }).Count);
+            }
+        }
+
+        [Test]
+        public static void TestRemoveElementAt()
+        {
+            foreach (var xs in Inputs)
+            {
+                for (var i = 0; i < xs.Length; ++i)
+                {
+                    var tmp = RemoveAt(xs, i);
+                    Assert.AreEqual(xs.Length - 1, tmp.Count);
+                    if (i < xs.Length - 1)
+                    {
+                        Assert.AreEqual(xs[i + 1], tmp[i]);
+                    }
+                }
+            }
         }
 
         [Test]
         public static void TestAddElement()
         {
-            Assert.AreEqual(AddElement(new[] { 1, 2 }, 3), new[] { 1, 2, 3 });
+            foreach (var xs in Inputs)
+            {
+                var tmp = AddElement(xs, 99);
+                Assert.AreEqual(xs.Length + 1, tmp.Count);
+                Assert.AreEqual(tmp[tmp.Count - 1], 99);
+            }
         }
 
         [Test]
         public static void TestReverse()
         {
-            Assert.AreEqual(new[] { 3, 2, 1 }, Reverse(new[] { 1, 2, 3 }));
+            foreach (var xs in Inputs)
+            {
+                var ys = Reverse(xs);
+                Assert.AreEqual(xs.Length, ys.Count);
+                Assert.IsTrue(IsReversed(xs, ys));
+            }
         }
 
         [Test]
@@ -706,6 +799,28 @@ namespace Assignment2
                     Assert.IsTrue(tmp.Count < xs.Length);
                     Assert.IsFalse(Contains(tmp, xs[0]));
                 }
+            }
+        }
+
+        [Test]
+        public static void TestTransform()
+        {
+            foreach (var xs in Inputs)
+            {
+                Assert.AreEqual(xs, Transform(xs, x => x));
+                var tmp = new int[xs.Length];
+                Array.Fill(tmp, 99);
+                Assert.AreEqual(tmp, Transform(xs, x => 99));
+            }
+        }
+
+        [Test]
+        public static void TestFilter()
+        {
+            foreach (var xs in Inputs)
+            {
+                Assert.AreEqual(xs, Filter(xs, x => true));
+                Assert.AreEqual(Array.Empty<int>(), Filter(xs, x => false));
             }
         }
     }
