@@ -7,7 +7,9 @@ public static class ListOperationsReference
     /// </summary>
     public static bool IsSorted<T>(IReadOnlyList<T> list) where T : IComparable<T>
     {
-        return list.Select((x, i) => i == 0 || x.CompareTo(list[i - 1]) >= 0).All(x => x);
+        return list
+            .Select((x, i) => i == 0 || x.CompareTo(list[i - 1]) >= 0)
+            .All(x => x);
     }
 
     /// <summary>
@@ -15,7 +17,9 @@ public static class ListOperationsReference
     /// </summary>
     public static bool IsSorted<T>(IReadOnlyList<T> list, int from, int count) where T : IComparable<T>
     {
-        return list.Select((x, i) => i <= from || i >= from + count || x.CompareTo(list[i - 1]) >= 0).All(x => x);
+        return list
+            .Select((x, i) => i <= from || i >= from + count || x.CompareTo(list[i - 1]) >= 0)
+            .All(x => x);
     }
 
     /// <summary>
@@ -31,7 +35,7 @@ public static class ListOperationsReference
     /// </summary>
     public static bool ListEquals<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2)
     {
-        return list1.Count == list2.Count && list1.Zip(list2, (x, y) => x.Equals(y)).All(x => x);
+        return list1.SequenceEqual(list2);
     }
 
     /// <summary>
@@ -39,8 +43,7 @@ public static class ListOperationsReference
     /// </summary>
     public static bool IsReversed<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2)
     {
-        return list1.Count == list2.Count 
-               && list1.Select((x, i) => x.Equals(list2[list2.Count - 1 - i])).All(x => x);
+        return list1.SequenceEqual(list2.Reverse());
     }
 
     /// <summary>
@@ -48,8 +51,7 @@ public static class ListOperationsReference
     /// </summary>
     public static bool IsReversed<T>(IReadOnlyList<T> list1, int index, IReadOnlyList<T> list2)
     {
-        return index + list2.Count < list1.Count &&
-               list2.Select((x, i) => x.Equals(list1[list2.Count - 1 - i + index])).All(x => x);
+        return list1.Skip(index).Take(list2.Count).SequenceEqual(list2.Reverse());
     }
 
     /// <summary>
@@ -57,7 +59,7 @@ public static class ListOperationsReference
     /// </summary>
     public static bool StartsWith<T>(IReadOnlyList<T> list, IReadOnlyList<T> prefix)
     {
-        return list.Count >= prefix.Count && list.Take(prefix.Count).Zip(prefix, (x, y) => x.Equals(y)).All(x => x);
+        return list.Count >= prefix.Count && list.Take(prefix.Count).SequenceEqual(prefix);
     }
 
     /// <summary>
@@ -65,8 +67,7 @@ public static class ListOperationsReference
     /// </summary>
     public static bool EndsWith<T>(IReadOnlyList<T> list, IReadOnlyList<T> suffix)
     {
-        return list.Count >= suffix.Count &&
-               list.Skip(list.Count - suffix.Count).Zip(suffix, (x, y) => x.Equals(y)).All(x => x);
+        return list.Count >= suffix.Count && list.Skip(list.Count - suffix.Count).SequenceEqual(suffix);
     }
 
     /// <summary>
