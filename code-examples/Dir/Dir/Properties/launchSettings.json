@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "Dir": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\cdigg\\OneDrive\\cs321\\grading /mask=*.png /r /short /sort=size /kb /nodate"
+    },
+    "Dir with help": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\cdigg\\OneDrive\\cs321\\grading /?"
+    },
+    "Dir with working dir": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\cdigg\\OneDrive\\cs321\\grading"
+    }
+  }
+}
