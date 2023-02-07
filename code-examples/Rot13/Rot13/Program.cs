@@ -6,12 +6,31 @@ namespace Rot13
     {
         public static void Main(string[] args)
         {
+            if (args.Length > 0)
+            {
+                var fileName = args[0];
+                if (!File.Exists(fileName))
+                {
+                    Console.WriteLine($"Expected first command-line argument {fileName} to be a valid filename");
+                    return;
+                }
+
+                SetStandardInputFromFile(fileName);
+            }
+            
             var line = Console.ReadLine();
             while (line != null)
             {
                 Console.WriteLine(Rot13(line));
                 line = Console.ReadLine();
             }
+        }
+
+        public static void SetStandardInputFromFile(string fileName)
+        {
+            // Redirect the input from a stream reader 
+            var fileReader = new StreamReader(fileName);
+            Console.SetIn(fileReader);
         }
 
         public static string Rot13_LongWay(string input)

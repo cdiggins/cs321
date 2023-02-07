@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Rot13": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\cdigg\\git\\cs321\\code-examples\\Rot13\\Rot13\\Program.cs"
+    }
+  }
+}
