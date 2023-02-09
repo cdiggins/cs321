@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Rot13
+﻿namespace Rot13
 {
     public static class Program
     {
@@ -33,18 +31,10 @@ namespace Rot13
             Console.SetIn(fileReader);
         }
 
-        public static string Rot13_LongWay(string input)
-        {
-            var list = new List<char>();
-            foreach (var c in input)
-                list.Add(Rot13(c));
-            var chars = list.ToArray();
-            return new string(chars);
-        }
-
-        public static string Rot13_ShortWay(string input)
-            => new(input.ToCharArray().Select(Rot13).ToArray());
-
+        /// <summary>
+        /// Given a strings returns a new strings with each letter offset by 13
+        /// uing the Rot13 algorithm. 
+        /// </summary>
         public static string Rot13(string input)
         {
             return new string(input.ToCharArray().Select(Rot13).ToArray());

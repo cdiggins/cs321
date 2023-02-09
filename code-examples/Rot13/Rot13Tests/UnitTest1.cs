@@ -6,6 +6,9 @@ namespace Rot13Tests
 {
     public static class Tests
     {
+        /// <summary>
+        /// This test uses a string reader to supply text to the standard input 
+        /// </summary>
         [Test]
         public static void SmokeTest()
         {
@@ -13,6 +16,8 @@ namespace Rot13Tests
             Console.SetIn(stringReader);
             Main(Array.Empty<string>());
         }
+
+        [Test]
 
         [Test]
         public static void Rot13CharTest()

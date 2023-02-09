@@ -1,5 +1,4 @@
 ﻿using SharedCode;
-using System.IO;
 
 namespace DirectoryProgram
 {
