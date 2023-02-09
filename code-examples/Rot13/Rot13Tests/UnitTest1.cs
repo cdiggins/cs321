@@ -15,9 +15,7 @@ namespace Rot13Tests
             var stringReader = new StringReader("abc");
             Console.SetIn(stringReader);
             Main(Array.Empty<string>());
-        }
-
-        [Test]
+        }     
 
         [Test]
         public static void Rot13CharTest()
