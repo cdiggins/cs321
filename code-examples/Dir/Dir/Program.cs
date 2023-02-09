@@ -115,6 +115,12 @@ namespace DirectoryProgram
             r.ShowSize = !Utils.HasOption(args, "nosize");
             r.Mask = Utils.GetOptionValue(args, "mask", r.Mask);
             r.UseKb = Utils.HasOption(args, "kb");
+            if (Utils.HasOption(args, "b"))
+            {
+                r.ShortName = true;
+                r.ShowDate = false;
+                r.ShowSize = false;
+            }
             return r;
         }
 
