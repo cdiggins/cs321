@@ -65,6 +65,7 @@ namespace StreamDemo
             while (line != null) 
             { 
                 yield return line; 
+                line = Console.ReadLine();
             } 
         }
 
