@@ -13,6 +13,5 @@ namespace SharedCode
         {
             return File.ReadLines(fileName, encoding).ToList();
         }
-
     }
 }
