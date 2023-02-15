@@ -1,0 +1,40 @@
+﻿Notes:
+
+* What are the nouns? 
+	* Deck
+	* Hand 
+	* Total
+	* Player
+	* Cards
+	* Bet
+	* Payoff 
+* What are the adjectives?
+	* Hard / Soft 
+	* Bust
+	* Blackjack
+* What are the verbs?
+	* Shuffle
+	* Deal
+	* Hit
+	* Double
+	* Surrender
+	* Split
+	* Stand
+	* Bet
+* How do I describe each noun:
+	* Player - the 
+	* Dealer - 
+	* Deck - set of 52 cards 
+	* Card - has a rank and a suit
+	* Rank - a value from 2 to 12 
+	* Hand - a set of cards in either the player's hand or dealer's hand
+	* Payoff - the value assigned to each 
+	* Total - a value that is hard or soft that is summed by the value of each card
+	* Card value - a value from 1 to 11 assigned to each card. Aces can either be assigned value 1 or 11. 
+	* Bust - having a total of greater than 21
+	* Soft - a value total less than 21 including an Ace valued at 11 
+	* Bet - the amount bet per hand 
+* Sequence of operations
+	* TODO:
+* Helper functions 
+* Questions 
