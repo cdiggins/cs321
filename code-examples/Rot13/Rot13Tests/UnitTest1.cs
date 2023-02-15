@@ -32,5 +32,17 @@ namespace Rot13Tests
         {
             That(Program.Rot13("Hello"), Is.EqualTo("Uryyb"));
         }
+
+        [Test]
+        public static void RedirectStandardOutput()
+        {
+            var stringReader = new StringReader("abc");
+            Console.SetIn(stringReader);
+            var tw = new StringWriter();
+            Console.SetOut(tw);
+            Program.Main(Array.Empty<string>());
+            var output = tw.ToString().Trim();
+            Assert.AreEqual("nop", output);
+        }
     }
 }
