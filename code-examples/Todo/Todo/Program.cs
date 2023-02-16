@@ -71,67 +71,72 @@ namespace Todo
 
             }
             r += Number;
-            return (DayOfWeek)(r % 7);   
+            return (DayOfWeek)(r % 7);
         }
+    }
 
-        public class ScheduledItem
+    public class ScheduledItem
     {
         public DateTime DateTime;
-        public string Name;
-        public string Description;
-        public TimeSpan Duration;
+        public bool IsPast() => DateTime.Now > DateTime;
     }
 
     public class Appointment : ScheduledItem 
     {
         public string Location;
+        public string ItemKind() => "Appointment";
     }
     
     public class Task : ScheduledItem 
     {
         public bool Completed;
+        public string ItemKind() => "Task";
     }    
 
-    public class CheckList : ScheduledItem
-    {
-        public List<Task> Tasks;
-    }
-    
     public class Reminder : ScheduledItem 
     {
         public ScheduledItem OtherTask;
+        public string ItemKind() => "Reminder";
     }
-    
+
+    public class CheckList : ScheduledItem
+    {
+        public List<Task> Tasks = new List<Task>();
+        public string ItemKind() => "Check list";
+    }
+
     public class Meeting : ScheduledItem 
     {
         public List<string> Attendees;
+        public string ItemKind() => "Meeting";
     }
 
     public class FocusTime : ScheduledItem 
-    { 
+    {
+        public string ItemKind() => "Focus";
     }
 
     public static class Program
     {
-        public static void ThreadStart(object? _)
+        public static void OutputItems(IEnumerable<ScheduledItem> items)
         {
-            while (true)
+            foreach (var item in items)
             {
-                Thread.Sleep(1000);
-                Console.WriteLine("Ping!");
+                var kind = "";
+                if (item is Appointment)
+                    kind = (item as Appointment).ItemKind();
+                if (item is Meeting)
+                    kind = (item as Meeting).ItemKind();
+                if (item is Task)
+                    kind = (item as Task).ItemKind();
+                if (item is Reminder)
+                    kind = (item as Reminder).ItemKind();
+                Console.WriteLine($"Item {kind} is scheduled for {item.DateTime}");
             }
         }
 
         public static void Main(string[] args)
         {
-            var thread = new Thread(ThreadStart);
-            thread.Start();
-            var input = "";
-            do
-            {
-                Console.WriteLine("Type in some input");
-            }
-            while ((input = Console.ReadLine()) != null);
         }
     }
 }
