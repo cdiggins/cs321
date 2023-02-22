@@ -172,7 +172,7 @@ namespace Assignment2
         [Test]
         public static void TestSortedMerge()
         {
-            Assert.AreEqual(SortedMerge(new[] { 1, 3, 5 }, new[] { 2, 4 }), new[] { 1, 2, 3, 4, 5 });
+            Assert.AreEqual(new[] { 1, 2, 3, 4, 5 }, SortedMerge(new[] { 1, 3, 5 }, new[] { 2, 4 }));
         }
 
         [Test]
@@ -181,10 +181,12 @@ namespace Assignment2
             Assert.AreEqual(new[] { 1, 3 }, RemoveElements(new[] { 1, 2, 3 }, 2));
         }
 
+        public static int MultiplyByTwo(int x) { return x; }
+
         [Test]
         public static void TestTransform()
         {
-            Assert.AreEqual(new[] { 2, 4, 6 }, Transform(new[] { 1, 2, 3 }, x => x * 2));
+            Assert.AreEqual(new[] { 2, 4, 6 }, Transform(new[] { 1, 2, 3 }, x => x.ToString()));
         }
 
         [Test]

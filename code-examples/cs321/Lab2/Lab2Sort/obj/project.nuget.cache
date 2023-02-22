@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "geWAGCuQvfkBEnmrX808DTI8SIwYuIHyo5lrK4b8XfqEDvu6hajw8xhLljGzx7EV4pMIMveQhlclfFcnARP+uQ==",
+  "dgSpecHash": "dxpPE2h1CJYsAxxGy+R0jE62e4YUxNVP3gYfb26v1Z/8QCE7jMPavngkW3KVMdU0AFyloPDblnC5LdYkFREqeg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\cdiggins\\source\\repos\\Lab2\\Lab2Sort\\Lab2Sort.csproj",
+  "projectFilePath": "C:\\Users\\cdigg\\git\\cs321\\code-examples\\cs321\\Lab2\\Lab2Sort\\Lab2Sort.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

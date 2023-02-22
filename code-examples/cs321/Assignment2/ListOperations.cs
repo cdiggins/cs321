@@ -18,16 +18,25 @@
 // This may seem like a daunting task at first, but look for opportunities to reduce
 // the amount of code you write, and to reuse existing functions, and it will become easier as you progress.
 
+using System.Diagnostics;
+using System.Security.Principal;
+
 namespace Assignment2
 {
     public static class ListOperations
     {
+        // Helper
+        public static bool All<T>(IReadOnlyList<T> xs, Func<T, int, bool> predicate)
+        {
+            return Filter(xs, predicate).Count == xs.Count;
+        }
+
         /// <summary>
         /// Returns true if the list is in ascending order, false otherwise. 
         /// </summary>
         public static bool IsSorted<T>(IReadOnlyList<T> xs) where T : IComparable<T>
         {
-            throw new NotImplementedException();
+            return All(xs, (x, i) => i == 0 || x.CompareTo(xs[i-1]) >= 0);
         }
 
         /// <summary>
@@ -35,7 +44,7 @@ namespace Assignment2
         /// </summary>
         public static bool IsSorted<T>(IReadOnlyList<T> list, int from, int count) where T : IComparable<T>
         {
-            throw new NotImplementedException();
+            return IsSorted(Subarray(list, from, count));
         }
 
         /// <summary>
@@ -43,7 +52,7 @@ namespace Assignment2
         /// </summary>
         public static int Count<T>(IReadOnlyList<T> list, T element)
         {
-            throw new NotImplementedException();
+            return Filter(list, x => x.Equals(element)).Count;
         }
 
         /// <summary>
@@ -51,7 +60,9 @@ namespace Assignment2
         /// </summary>
         public static bool ListEquals<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2)
         {
-            throw new NotImplementedException();
+            if (list1.Count != list2.Count)
+                return false;
+            return All(list1, (x, i) => x.Equals(list2[i]));
         }
 
         /// <summary>
@@ -59,7 +70,7 @@ namespace Assignment2
         /// </summary>
         public static bool IsReversed<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2)
         {
-            throw new NotImplementedException();
+            return ListEquals(list1, Reverse(list2));
         }
 
         /// <summary>
@@ -67,7 +78,7 @@ namespace Assignment2
         /// </summary>
         public static bool IsReversed<T>(IReadOnlyList<T> list1, int index, IReadOnlyList<T> list2)
         {
-            throw new NotImplementedException();
+            return IsReversed(Subarray(list1, index, list2.Count), list2);
         }
 
         /// <summary>
@@ -75,7 +86,7 @@ namespace Assignment2
         /// </summary>
         public static bool StartsWith<T>(IReadOnlyList<T> list, IReadOnlyList<T> prefix)
         {
-            throw new NotImplementedException();
+            return ListEquals(Take(list, prefix.Count), prefix);
         }
 
         /// <summary>
@@ -83,7 +94,7 @@ namespace Assignment2
         /// </summary>
         public static bool EndsWith<T>(IReadOnlyList<T> list, IReadOnlyList<T> suffix)
         {
-            throw new NotImplementedException();
+            return ListEquals(TakeLast(list, suffix.Count), suffix);
         }
 
         /// <summary>
@@ -91,7 +102,10 @@ namespace Assignment2
         /// </summary>
         public static int IndexOf<T>(IReadOnlyList<T> list, T value)
         {
-            throw new NotImplementedException();
+            for (var i = 0; i < list.Count; ++i)
+                if (list[i].Equals(value))
+                    return i;
+            return -1;
         }
 
         /// <summary>
@@ -99,7 +113,10 @@ namespace Assignment2
         /// </summary>
         public static int LastIndexOf<T>(IReadOnlyList<T> list, T value)
         {
-            throw new NotImplementedException();
+            for (var i = list.Count - 1; i >= 0; --i)
+                if (list[i].Equals(value))
+                    return i;
+            return -1;
         }
 
         /// <summary>
@@ -107,7 +124,7 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> Skip<T>(IReadOnlyList<T> list, int n)
         {
-            throw new NotImplementedException();
+            return Subarray(list, n, list.Count - n);
         }
 
         /// <summary>
@@ -115,7 +132,7 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> Take<T>(IReadOnlyList<T> list, int n)
         {
-            throw new NotImplementedException();
+            return Subarray(list, 0, n);
         }
 
         /// <summary>
@@ -123,7 +140,7 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> TakeLast<T>(IReadOnlyList<T> list, int n)
         {
-            throw new NotImplementedException();
+            return Subarray(list, list.Count - n, n);
         }
 
         /// <summary>
@@ -131,7 +148,7 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> Drop<T>(IReadOnlyList<T> list, int n)
         {
-            throw new NotImplementedException();
+            return Subarray(list, 0, list.Count - n);
         }
 
         /// <summary>
@@ -139,7 +156,7 @@ namespace Assignment2
         /// </summary>
         public static bool Contains<T>(IReadOnlyList<T> list, T value)
         {
-            throw new NotImplementedException();
+            return IndexOf(list, value) >= 0;
         }
 
         /// <summary>
@@ -147,7 +164,12 @@ namespace Assignment2
         /// </summary>
         public static int IndexOfMin<T>(IReadOnlyList<T> list) where T : IComparable<T>
         {
-            throw new NotImplementedException();
+            if (list.Count == 0) return -1;
+            var r = 0;
+            for (var i = 1; i < list.Count; ++i)
+                if (list[i].CompareTo(list[r]) < 0)
+                    r = i;
+            return r;
         }
 
         /// <summary>
@@ -155,7 +177,12 @@ namespace Assignment2
         /// </summary>
         public static int IndexOfMax<T>(IReadOnlyList<T> list) where T : IComparable<T>
         {
-            throw new NotImplementedException();
+            if (list.Count == 0) return -1;
+            var r = 0;
+            for (var i = 1; i < list.Count; ++i)
+                if (list[i].CompareTo(list[r]) > 0)
+                    r = i;
+            return r;
         }
 
         /// <summary>
@@ -163,7 +190,7 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> UniqueElements<T>(IReadOnlyList<T> list)
         {
-            throw new NotImplementedException();
+            return Filter(list, x => Count(list, x) == 1);
         }
 
         /// <summary>
@@ -171,7 +198,7 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> InsertElement<T>(IReadOnlyList<T> list, T element, int index)
         {
-            throw new NotImplementedException();
+            return InsertElements(list, new[] { element }, index);
         }
 
         /// <summary>
@@ -179,7 +206,10 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> InsertElements<T>(IReadOnlyList<T> list, IReadOnlyList<T> range, int index)
         {
-            throw new NotImplementedException();
+            var prefix = Take(list, index);
+            var tmp = AddElements(prefix, range);
+            var suffix = Skip(list, index);
+            return AddElements(tmp, suffix);
         }
 
         /// <summary>
@@ -187,7 +217,7 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> RemoveAt<T>(IReadOnlyList<T> list, int index)
         {
-            throw new NotImplementedException();
+            return RemoveRange(list, index, 1);
         }
 
         /// <summary>
@@ -195,7 +225,7 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> RemoveElements<T>(IReadOnlyList<T> list, T element)
         {
-            throw new NotImplementedException();
+            return Filter(list, x => !x.Equals(element));
         }
 
         /// <summary>
@@ -203,7 +233,7 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> RemoveElements<T>(IReadOnlyList<T> list, IReadOnlyList<T> elements)
         {
-            throw new NotImplementedException();
+            return Filter(list, x => !Contains(elements, x));
         }
 
         /// <summary>
@@ -211,7 +241,7 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> RemoveRange<T>(IReadOnlyList<T> list, int index, int count)
         {
-            throw new NotImplementedException();
+            return Filter(list, (x, i) => i < index || i >= index + count);
         }
 
         /// <summary>
@@ -219,7 +249,7 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> AddElement<T>(IReadOnlyList<T> list, T element)
         {
-            throw new NotImplementedException();
+            return AddElements(list, new[] { element });
         }
 
         /// <summary>
@@ -227,7 +257,10 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> AddElements<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2)
         {
-            throw new NotImplementedException();
+            var r = new List<T>();
+            foreach (var x in list1) r.Add(x);
+            foreach (var x in list2) r.Add(x);
+            return r;
         }
 
         /// <summary>
@@ -235,7 +268,32 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> SortedMerge<T>(IReadOnlyList<T> list1, IReadOnlyList<T> list2) where T : IComparable<T>
         {
-            throw new NotImplementedException();
+            var i = 0;
+            var j = 0;
+            var r = new List<T>();
+
+            // Either i or j is incremented each time
+            while (i < list1.Count && j < list2.Count)
+            {
+                if (list1[i].CompareTo(list2[j]) < 0)
+                {
+                    r.Add(list1[i++]);
+                }
+                else
+                {
+                    r.Add(list2[j++]);
+                }
+            }
+
+            // Add remainder of list1
+            for (; i < list1.Count; ++i)
+                r.Add(list1[i]);
+
+            // Add remainder of list2
+            for (; j < list2.Count; ++j)
+                r.Add(list1[j]);
+            
+            return r;
         }
 
         /// <summary>
@@ -243,7 +301,10 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> Reverse<T>(IReadOnlyList<T> list)
         {
-            throw new NotImplementedException();
+            var r = new List<T>();
+            for (var i = list.Count - 1; i >= 0; --i)
+                r.Add(list[i]);
+            return r;
         }
 
         /// <summary>
@@ -251,7 +312,10 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> Reverse<T>(IReadOnlyList<T> list, int start, int count)
         {
-            throw new NotImplementedException();
+            var a = Take(list, start);
+            var b = Subarray(list, start, count);
+            var c = Skip(list, start + count);
+            return AddElements(AddElements(a, Reverse(b)), c);
         }
 
         /// <summary>
@@ -259,7 +323,7 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> Subarray<T>(IReadOnlyList<T> list, int start, int count)
         {
-            throw new NotImplementedException();
+            return Filter(list, (x, i) => i >= start && i < start + count);
         }
 
         /// <summary>
@@ -267,7 +331,12 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> Sort<T>(IReadOnlyList<T> list) where T : IComparable<T>
         {
-            throw new NotImplementedException();
+            if (list.Count <= 1)
+                return list;
+            var mid = list.Count / 2;
+            var prefix = Sort(Take(list, mid));
+            var suffix = Sort(Skip(list, mid));
+            return SortedMerge(prefix, suffix);
         }
 
         /// <summary>
@@ -275,7 +344,16 @@ namespace Assignment2
         /// </summary>
         public static void SortInPlace<T>(IList<T> list) where T : IComparable<T>
         {
-            throw new NotImplementedException();
+            for (var i = 0; i < list.Count; ++i)
+            {
+                for (var j = i + 1; j < list.Count; ++j)
+                {
+                    if (list[i].CompareTo(list[j]) < 0)
+                    {
+                        Helpers.SwapInPlace(list, i, j);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -283,7 +361,10 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T1> Transform<T0, T1>(IReadOnlyList<T0> list, Func<T0, T1> transformer)
         {
-            throw new NotImplementedException();
+            var r = new List<T1>();
+            foreach (var x in list)
+                r.Add(transformer(x));
+            return r;
         }
 
         /// <summary>
@@ -291,8 +372,16 @@ namespace Assignment2
         /// </summary>
         public static IReadOnlyList<T> Filter<T>(IReadOnlyList<T> list, Func<T, bool> predicate)
         {
-            throw new NotImplementedException();
+            return Filter(list, (x, i) => predicate(x));
+        }
+
+        public static IReadOnlyList<T> Filter<T>(IReadOnlyList<T> list, Func<T, int, bool> predicate)
+        {
+            var r = new List<T>();
+            for (var i=0; i < list.Count; ++i) 
+                if (predicate(list[i], i))
+                    r.Add(list[i]);
+            return r;
         }
     }
-
 }

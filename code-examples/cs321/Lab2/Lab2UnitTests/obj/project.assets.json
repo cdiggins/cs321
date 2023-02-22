@@ -3926,23 +3926,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\cdiggins\\.nuget\\packages\\": {},
+    "C:\\Users\\cdigg\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cdiggins\\source\\repos\\Lab2\\Lab2UnitTests\\Lab2UnitTests.csproj",
+      "projectUniqueName": "C:\\Users\\cdigg\\git\\cs321\\code-examples\\cs321\\Lab2\\Lab2UnitTests\\Lab2UnitTests.csproj",
       "projectName": "Lab2UnitTests",
-      "projectPath": "C:\\Users\\cdiggins\\source\\repos\\Lab2\\Lab2UnitTests\\Lab2UnitTests.csproj",
-      "packagesPath": "C:\\Users\\cdiggins\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cdiggins\\source\\repos\\Lab2\\Lab2UnitTests\\obj\\",
+      "projectPath": "C:\\Users\\cdigg\\git\\cs321\\code-examples\\cs321\\Lab2\\Lab2UnitTests\\Lab2UnitTests.csproj",
+      "packagesPath": "C:\\Users\\cdigg\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\cdigg\\git\\cs321\\code-examples\\cs321\\Lab2\\Lab2UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\cdiggins\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\cdigg\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4007,7 +4007,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
