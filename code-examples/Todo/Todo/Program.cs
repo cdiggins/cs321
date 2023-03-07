@@ -75,22 +75,23 @@ namespace Todo
         }
     }
 
-    public class ScheduledItem
+    public abstract class ScheduledItem
     {
         public DateTime DateTime;
         public bool IsPast() => DateTime.Now > DateTime;
+        public abstract string ItemKind();
     }
 
     public class Appointment : ScheduledItem 
     {
         public string Location;
-        public string ItemKind() => "Appointment";
+        public override string ItemKind() => "Appointment";
     }
     
     public class Task : ScheduledItem 
     {
         public bool Completed;
-        public string ItemKind() => "Task";
+        public override string ItemKind() => "Task";
     }    
 
     public class Reminder : ScheduledItem 
@@ -118,7 +119,7 @@ namespace Todo
 
     public static class Program
     {
-        public static void OutputItems(IEnumerable<ScheduledItem> items)
+        public static void OutputItems_Long(IEnumerable<ScheduledItem> items)
         {
             foreach (var item in items)
             {
@@ -131,6 +132,32 @@ namespace Todo
                     kind = (item as Task).ItemKind();
                 if (item is Reminder)
                     kind = (item as Reminder).ItemKind();
+                Console.WriteLine($"Item {kind} is scheduled for {item.DateTime}");
+            }
+        }
+
+        public static void OutputItems_NonVirtual(IEnumerable<ScheduledItem> items)
+        {
+            foreach (var item in items)
+            {
+                var kind = "";
+                if (item is Appointment appointment)
+                    kind = appointment.ItemKind();
+                if (item is Meeting meeting)
+                    kind = meeting.ItemKind();
+                if (item is Task task)
+                    kind = task.ItemKind();
+                if (item is Reminder reminder)
+                    kind = reminder.ItemKind();
+                Console.WriteLine($"Item {kind} is scheduled for {item.DateTime}");
+            }
+        }
+
+        public static void OutputItems(IEnumerable<ScheduledItem> items)
+        {
+            foreach (var item in items)
+            {
+                var kind = item.ItemKind();
                 Console.WriteLine($"Item {kind} is scheduled for {item.DateTime}");
             }
         }

@@ -2,9 +2,9 @@
 {
     public class Game
     {
-        public Deck Deck = new Deck();
-        public Player Dealer = new Player();
-        public Player Player = new Player();
+        private Deck Deck = new Deck();
+        private Player Dealer = new Player();
+        private Player Player = new Player();
 
         public bool CanPlayerHit
             => Player.CanHit;
