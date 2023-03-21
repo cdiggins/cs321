@@ -81,7 +81,17 @@ namespace SimplePainterApplication
 
         private void testToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Draw five shapes here!");
+        }
 
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Support undo here by deleting the last item in the list");
+        }
+
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Clear all the shapes here");
         }
     }
 }
