@@ -11,22 +11,39 @@ namespace Tests
         {
         }
 
+
+        public static readonly Shape MyShape = new Shape()
+        {
+            FillColor = System.Drawing.Color.Blue,
+            StrokeColor = Color.SaddleBrown,
+            StrokeThickness = 2,
+            X = 5,
+            Y = 10,
+            Width = 12,
+            Height = 13,
+            Filled = true,
+            Type = ShapeType.Ellipse,
+        };
+
+        [Test]
+        public void TestReflection()
+        {
+            var t = MyShape.GetType();
+            foreach (var fi in t.GetFields())
+            {
+                var name= fi.Name;
+                var value = fi.GetValue(MyShape);
+                Console.WriteLine($"Field {name} has value {value}");
+            }
+        }
+
+
         [Test]
         public void Test1()
         {
-            var shape = new Shape()
-            {
-                FillColor = System.Drawing.Color.Blue,
-                StrokeColor = Color.SaddleBrown,
-                StrokeThickness = 2,
-                X = 5, Y = 10,
-                Width = 12, Height = 13,
-                Filled = true,
-                Type = ShapeType.Ellipse,
-            };
             var xs = new XmlSerializer(typeof(Shape));
             var sw = new StringWriter();
-            xs.Serialize(sw, shape);
+            xs.Serialize(sw, MyShape);
             var text = sw.ToString();
             Console.WriteLine(text);
 
