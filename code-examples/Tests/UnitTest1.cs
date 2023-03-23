@@ -11,6 +11,18 @@ namespace Tests
         {
         }
 
+        public record ShapeRecord(
+            Color StrokeColor,
+            float StrokeThickness,
+            float X,
+            float Y,
+            float Width,
+            float Height,
+            Color FillColor,
+            bool Filled,
+            ShapeType Type
+        );
+
 
         public static readonly Shape MyShape = new Shape()
         {

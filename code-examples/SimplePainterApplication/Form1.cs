@@ -3,6 +3,7 @@ namespace SimplePainterApplication
     public partial class Form1 : Form
     {
         public List<Shape> Shapes = new List<Shape>();
+        public List<Shape> RedoStack = new List<Shape>();
 
         public Form1()
         {
@@ -86,7 +87,12 @@ namespace SimplePainterApplication
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Support undo here by deleting the last item in the list");
+            //MessageBox.Show("Support undo here by deleting the last item in the list");
+
+            // Delete the most recent shape
+            if (Shapes.Count > 0) 
+                Shapes.RemoveAt(Shapes.Count - 1);
+            pictureBox1.Invalidate();
         }
 
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
