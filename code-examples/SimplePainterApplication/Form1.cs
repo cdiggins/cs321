@@ -79,7 +79,7 @@ namespace SimplePainterApplication
                 }
             }
         }
-
+        1
         private void testToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Draw five shapes here!");
