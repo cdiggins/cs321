@@ -11,3 +11,5 @@ The first half of the course will focus on core features and concepts of C#, obj
 The language of instruction will be C# 7.0 and the programming environment will be Visual Studio on Windows. The techniques, principles, and patterns learned will be applicable to various high-level multiparadigm languages and programming environments.
 
 The lab assignments will emphasize building familiarity with C#, Visual Studio, .NET, and coding techniques, with the aim of preparing students to be able to effectively complete the final project. Examples include  using the debugger, release and debug builds, unit and integration testing, refactoring code, code reuse, using packages, code analysis, using Git and GitHub, and disassemblers. 
+
+Goodbye!
