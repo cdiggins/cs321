@@ -91,7 +91,7 @@ namespace SvgDemoWinForms
         public Color FillColor { get; set; }
     }
 
-    public class SimpleShape : Element
+    public class SimpleShape : Shape
     {
         public Point Position { get; set; }
         public Size Size { get; set; }
@@ -138,8 +138,10 @@ namespace SvgDemoWinForms
         public List<string> RecentFiles { get; set; }
     }
 
-    public class Document
+    public class SvgDocument
     {
+        public Element CurrentDrawing { get; set; }
+        public List<string> SelectedIds { get; set; } = new();
         public List<Element> Elements { get; set; } = new();
 
         public string ToJson()
@@ -152,9 +154,9 @@ namespace SvgDemoWinForms
             });
         }
 
-        public static Document? FromJson(string json)
+        public static SvgDocument? FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Document>(json,
+            return JsonConvert.DeserializeObject<SvgDocument>(json,
                 new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.All

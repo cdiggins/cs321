@@ -5,16 +5,13 @@ namespace SvgDemoTests
 {
     public static class Tests
     {
-        public static Color Convert(this System.Drawing.Color color)
-            => new() { R = color.R, B = color.B, G = color.G };
-
         public static Size Size1 = new Size() { Width = 50, Height = 60 };
         public static Size Size2 = new Size() { Width = 10, Height = 80 };
         public static Point Pt1 = new Point() { X = 3, Y = 10 };
         public static Point Pt2 = new Point() { X = 20, Y = 5 };
         public static Point Pt3 = new Point() { X = 4, Y = 5 };
 
-        public static Document Doc = new Document()
+        public static SvgDocument Doc = new SvgDocument()
         {
             Elements = new List<Element>()
             {
@@ -40,7 +37,7 @@ namespace SvgDemoTests
         {
             var txt = Doc.ToJson();
             Console.WriteLine(txt);
-            var val = Document.FromJson(txt);
+            var val = SvgDocument.FromJson(txt);
             txt = val.ToJson();
             Console.WriteLine(txt);
         }
